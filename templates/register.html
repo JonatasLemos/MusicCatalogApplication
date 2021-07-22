@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<body>
+{% include 'partials/_navbar.html' %}
+<div class="container-fluid" id="search-form">
+    <h2 class="mt-5 text-center">Register</h2>
+    <form action="{% url 'register' %}" method="POST" autocomplete="off">
+        {% csrf_token %}
+        <div class="row centralize">
+            <div class="col-7 col-lg-7 mt-4">
+                {% if messages %}
+                {% for message in messages %}
+                <p id="message-container" {% if message.tags %}
+                   class="alert alert-warning" {% endif %}>{{ message }}</p>
+                {% endfor %}
+                {% endif %}
+            </div>
+            <div class="col-7 col-lg-7 mt-2">
+                <label for="name"><b>Username</b></label>
+                <input autocomplete="on" type="text" class="form-control" id="name" name="name"
+                       placeholder="Ex.:james22"
+                       required>
+            </div>
+            <div class="col-7 col-lg-7 mt-4">
+                <label for="email"><b>Email</b></label>
+                <input autocomplete="on" type="email" class="form-control" id="email" name="email"
+                       placeholder="Ex.:abcd@gmail.com" required>
+            </div>
+            <div class="col-7 col-lg-7 mt-4">
+                <div class="row">
+                    <div class="col-6">
+                        <label for="password"><b>Password</b></label>
+                        <input autocomplete="on" type="password" class="form-control" id="password" name="password"
+                               required>
+                    </div>
+                    <div class="col-6">
+                        <label for="password2"><b>Repeat Password</b></label>
+                        <input autocomplete="on" type="password" class="form-control" id="password2" name="password2"
+                               required>
+                    </div>
+                </div>
+            </div>
+            <div class="col-7 col-lg-7 mt-4 text-center">
+                <button class="btn btn-success col-3" id="search-button" type="submit">Register
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+{% endblock %}

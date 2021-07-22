@@ -1,0 +1,12 @@
+venv
+.idea
+migrations
+manage.py
+static/admin
+__pycache__/
+__init__.py
+db.sqlite3
+albums/scratch.py
+chromedriver.exe
+secrets.json
+albums/secrets.py

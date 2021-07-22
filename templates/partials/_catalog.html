@@ -1,0 +1,62 @@
+<div class="row">
+    {% for element in catalog %}
+    <div class="col-4 py-5 text-center centralize">
+        <div class="card" style="width: 95%">
+            <form class="pt-3" action="{% url 'details' %}">
+                <button class="btn btn-link" type="submit" name="id" value="{{ element.id }}">
+                    <img class="" src="{{ element.image }}" alt="{{ element.album }}" width="100%" height="450px">
+                </button>
+                <div class="card-body">
+                    <p class="pt-1"><b>Artist: </b>{{ element.artist }}</p>
+                    <p><b>Album: </b>{{ element.album }}</p>
+                    <p><b>Year: </b>{{ element.year }}</p>
+                    {% if element.rate %}
+                    <p><b>Rate: </b>{{ element.rate }}/5</p>
+                    {% else %}
+                    <p><b>Rate: </b>No rate yet</p>
+                    {% endif %}
+                    <button class="btn btn-success" type="submit" name="id" value="{{ element.id }}">See details
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{#PAGINATION#}
+<div class="container">
+    {% if catalog.has_other_pages %}
+    <ul class="pagination py-2" style="justify-content: center;">
+        {% if catalog.has_previous %}
+        <li class="page-item">
+            <a href="?page={{ catalog.previous_page_number }}&{{ parameters }}" class="page-link">&laquo;</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link">&laquo;</a>
+        </li>
+        {% endif %}
+        {% for page in catalog.paginator.page_range %}
+        {% if catalog.number == page %}
+        <li class="page-item active">
+            <a class="page-link">{{ page }}</a>
+        </li>
+        {% else %}
+        <li class="page-item">
+            <a href="?page={{ page }}&{{ parameters }}" class="page-link">{{ page }}</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+        {% if catalog.has_next %}
+        <li class="page-item">
+            <a href="?page={{ catalog.next_page_number }}&{{ parameters }}" class="page-link">&raquo;</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link">&raquo;</a>
+        </li>
+        {% endif %}
+    </ul>
+    {% endif %}
+</div>
+{#PAGINATION END#}

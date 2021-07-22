@@ -1,0 +1,22 @@
+div .centralize > div {
+    margin:0 auto;
+}
+#spinner {
+    display: none!important;
+}
+#advanced-form {
+    display: none;
+}
+
+#navbarSupportedContent > ul > li.nav-item{
+    font-size:1.3em;
+}
+textarea {
+    resize:none!important;
+}
+p{
+    font-size:1.6em;
+}
+div .rate > p {
+    font-size: 2.1em!important;
+}

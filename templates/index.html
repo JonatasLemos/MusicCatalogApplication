@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{#{% load static %}#}
+{% block content %}
+{% include 'partials/_navbar.html' %}
+<div class="container-fluid mt-5">
+    {% if messages %}
+    {% for message in messages %}
+    <p id="message-container" {% if message.tags %} class="alert alert-warning" {% endif %}>{{ message }}</p>
+    {% endfor %}
+    {% endif %}
+    {% if user.is_authenticated %}
+    <h2 class="py-5">Hi <b><i>{{user.username}}</i></b>, the number of albums in your catalog is: <b><i>{{album_count}}</i></b></h2>
+    {% include 'partials/_catalog.html' %}
+    {% else %}
+    <h1 class="py-3">Welcome to MyCollection</h1>
+    <h3 class="py-4">Login to see your catalog</h3>
+    <a href="{% url 'login' %}" class="btn btn-success" role="button" aria-pressed="true">Login</a>
+    {% endif %}
+</div>
+{% endblock %}

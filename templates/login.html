@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<body>
+{% include 'partials/_navbar.html' %}
+<div class="container-fluid" id="search-form">
+    <h2 class="mt-5 text-center">Login</h2>
+    <form action="{% url 'login' %}" method="POST" autocomplete="off">
+        {% csrf_token %}
+        <div class="row centralize">
+            <div class="col-7 col-lg-7 mt-4">
+                {% if messages %}
+                {% for message in messages %}
+                <p id="message-container" {% if message.tags %}
+                   class="alert alert-warning" {% endif %}>{{ message }}</p>
+                {% endfor %}
+                {% endif %}
+            </div>
+            <div class="col-7 col-lg-7 mt-2">
+                <label for="name"><b>Username</b></label>
+                <input autocomplete="on" type="text" class="form-control" id="name" name="name"
+                       placeholder="Ex.:james22"
+                       required>
+            </div>
+            <div class="col-7 col-lg-7 mt-4">
+                <label for="password"><b>Password</b></label>
+                <input autocomplete="on" type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <div class="col-7 col-lg-7 mt-4 text-center">
+                <button class="btn btn-success col-3" id="login-button" type="submit">Login
+                </button>
+            </div>
+            <div class="col-7 col-lg-7 mt-4 text-center">
+                <a href="{% url 'register' %}">Not user yet? Register for free</a>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+{% endblock %}

@@ -1,0 +1,8 @@
+<label><b>Rate this album (1-5)</b></label>
+<input type="number" min="1" max="5" class="form-control" list="datalistOptions" name="rate"
+       placeholder="Choose rate (optional)" autocomplete="off" id="rates">
+<datalist id="datalistOptions" type="text">
+    {% for i,j in rates %}
+    <option value="{{ i }}">{{ j }}</option>
+    {% endfor %}
+</datalist>

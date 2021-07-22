@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<body>
+{% include 'partials/_navbar.html' %}
+<div class="container-fluid" id="search-form">
+    <h2 class="mt-5 text-center" id="album-header">Add a new album to your catalog</h2>
+    <div class="spinner-border center mt-5" id="spinning" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+    <form id="form-album" action="{% url 'search' %}" method="POST" autocomplete="off">
+        {% csrf_token %}
+        <div class="row centralize">
+            <div class="col-7 col-lg-7 mt-4">
+                {% if messages %}
+                {% for message in messages %}
+                <p id="message-container" {% if message.tags %}
+                   class="alert alert-warning" {% endif %}>{{ message }}</p>
+                {% endfor %}
+                {% endif %}
+            </div>
+            <div class="col-7 col-lg-7 mt-4">
+                <label for="add_artist"><b>Artist name</b></label>
+                <input autocomplete="on" type="text" class="form-control" id="add_artist" name="artist"
+                       placeholder="Ex.:King Crimson"
+                       required>
+            </div>
+            <div class="col-7 col-lg-7 mt-4">
+                <label for="add_album"><b>Album name</b></label>
+                <input autocomplete="on" type="text" class="form-control" id="add_album" name="album"
+                       placeholder="Ex.:Lizard" required>
+            </div>
+            <div class="col-7 col-lg-7 mt-4">
+                {% include 'partials/_datalist.html' %}
+            </div>
+            <div class="col-7 col-lg-7 mt-4">
+                <label for="comment"><b>Add a comment (600 characters maximum)</b></label>
+                <textarea type="text" class="form-control" id="comment" name="comment" placeholder="Comment (optional)"
+                          rows="6" maxlength="600"></textarea>
+            </div>
+            <div class="col-7 col-lg-7 mt-4 text-center">
+                <button class="btn btn-success col-3" id="search-album" type="submit">Search album
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+{% endblock %}

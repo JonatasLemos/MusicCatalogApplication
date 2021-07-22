@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+    <body>
+    {% include 'partials/_navbar.html' %}
+    <form action="{% url 'find' 1 %}" class="container-fluid">
+    <h2 class="pt-5 text-center">Advanced Search</h2>
+        {% if filters %}
+            {% for label,filter in filters.items %}
+                <div class="mt-2 text-center">
+                    <label style="padding-top: 30px"
+                           class="form-label">{{ label | capfirst }}</label>
+                    <input class="center form-control col-3" list="{{ label }}" id="{{ label }}DataList"
+                           name="{{ label }}"
+                           placeholder="Type to search {{ label }}..." autocomplete="off">
+                    <datalist id="{{ label }}">
+                        {% for option in filter %}
+                            <option value="{{ option }}"></option>
+                        {% endfor %}
+                    </datalist>
+                </div>
+            {% endfor %}
+        {% endif %}
+        <div class="text-center mt-2">
+            <label style="padding-top: 30px">Artist or Album</label>
+            <input class="center form-control col-3" type="text" name="album"
+                   placeholder="Search an album or band in your catalog">
+            <button class="col-2 btn btn-success my-5" type="submit">Search</button>
+        </div>
+    </form>
+    </body>
+{% endblock %}

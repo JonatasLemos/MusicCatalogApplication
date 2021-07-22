@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{#{% load static %}#}
+{% block content %}
+    {% include 'partials/_navbar.html' %}
+    <div class="container-fluid">
+        <h1 class="pt-5">Search result</h1>
+        <h3><i>{{album_count}}</i> album(s) match your search</h3>
+        {% if messages %}
+            {% for message in messages %}
+                <p id="message-container" {% if message.tags %} class="alert alert-warning"{% endif %}>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+        {% include 'partials/_catalog.html' %}
+{#    {% include 'partials/_pagination.html' %}#}
+    </div>
+{% endblock %}

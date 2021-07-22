@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+{% include 'partials/_navbar.html' %}
+<div class="container-fluid mt-4">
+    {% if messages %}
+    {% for message in messages %}
+    <p id="message-container" {% if message.tags %}
+       class="alert alert-warning" {% endif %}>{{ message }}</p>
+    {% endfor %}
+    {% endif %}
+    <div class="row mx-4 mt-4">
+        {% if user_albums %}
+        {% for element in user_albums %}
+        <div class="col-4 mt-4 text-center">
+            <img src="{{ element.image }}" alt="{{ element.album }}" width="500px" height="500px">
+        </div>
+        <div class="px-5 mt-4 col-4 text-center details">
+            <p><b>Artist: </b>{{ element.artist }}</p>
+            <p><b>Album: </b>{{ element.album }}</p>
+            <p><b>Year: </b>{{ element.year }}</p>
+            <p><b>Place: </b>{{ element.country }}</p>
+            <p><b>Style: </b>{{ element.styles }}</p>
+            <p><b>Genre: </b>{{ element.genres }}</p>
+            <p><b>Label: </b>{{ element.label }}</p>
+            {% if element.rate != None %}
+                <p><b>Rate: </b>{{ element.rate }}/5 </p>
+            {% endif %}
+            <p><a href="{{element.url}}" target="_blank">See in Discogs</a></p>
+            <form action="{% url 'delete' %}" method="post">
+                {% csrf_token %}
+                <button class="btn btn-danger my-3 col-3" type="submit" name="id" value="{{ element.id }}">
+                    Delete
+                </button>
+            </form>
+        </div>
+        <div class="col-4 text-center rate">
+            <form action="{% url 'edit' %}" method="post">
+                {% csrf_token %}
+                <h3 class="mb-3">Edit rate or commentary</h3>
+                {% include 'partials/_datalist.html' %}
+                <label class="mt-4"><b>Commentary</b></label>
+                <textarea type="text" class="form-control"
+                          name="commentary">{{ element.commentary }}</textarea>
+                <button class="btn btn-warning mt-3 col-4" type="submit" id="submit" name="id" value="{{ element.id }}">
+                    Edit
+                </button>
+            </form>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

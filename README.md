@@ -15,7 +15,31 @@
 - Database Postgres
 - Foram realizados testes automatizados no app albums
 - O foco do projeto é Backend entretanto para tornar o visual mais agradável foi usado Bootstrap. 
-- Veja requirements.txt para mais detalhes quanto aos pacotes utilizados 
+- Veja requirements.txt para mais detalhes quanto aos pacotes utilizados
+
+### Execução
+
+0 - Clonar repositorio
+```
+git clone git@github.com:JonatasLemos/MusicCatalogApplication.git
+```
+1 - Instalar requerimentos num ambiente virtual
+```
+pip install -r requirements.txt
+```
+2 - Criar SECRET_KEY http://www.miniwebtool.com/django-secret-key-generator/
+```
+export SECRET_KEY='<secret_key>'
+```
+3 - Fazer migrações para database Postgres
+```
+python manage.py makemigrations
+python manage.py migrate
+```
+4 - Subir servidor de desenvolvimento
+```
+python manage.py runserver
+```
 
 ## EN
 
